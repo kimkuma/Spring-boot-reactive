@@ -1,5 +1,6 @@
-package com.greglturnquist.hackingspringboot.reactive;
+package com.greglturnquist.hackingspringboot.reactive.service;
 
+import com.greglturnquist.hackingspringboot.reactive.domain.Dish;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -15,7 +16,7 @@ public class KitchenService {
      * 요리 스트림 생성
      * @return
      */
-    Flux<Dish> getDishes() {
+    public Flux<Dish> getDishes() {
         return Flux.<Dish> generate(sink -> sink.next(randomDish()))
                 .delayElements(Duration.ofMillis(250));
     }

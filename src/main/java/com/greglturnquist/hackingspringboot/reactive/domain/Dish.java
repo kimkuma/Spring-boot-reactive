@@ -1,4 +1,4 @@
-package com.greglturnquist.hackingspringboot.reactive;
+package com.greglturnquist.hackingspringboot.reactive.domain;
 
 public class Dish {
 
@@ -11,7 +11,7 @@ public class Dish {
         return deliveredDish;
     }
 
-    Dish(String description) {
+    public Dish(String description) {
         this.description = description;
     }
 
