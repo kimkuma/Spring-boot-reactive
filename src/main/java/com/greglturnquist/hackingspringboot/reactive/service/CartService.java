@@ -2,9 +2,13 @@ package com.greglturnquist.hackingspringboot.reactive.service;
 
 import com.greglturnquist.hackingspringboot.reactive.domain.commerce.Cart;
 import com.greglturnquist.hackingspringboot.reactive.domain.commerce.CartItem;
+import com.greglturnquist.hackingspringboot.reactive.domain.commerce.Item;
 import com.greglturnquist.hackingspringboot.reactive.repository.commerce.CartRepository;
 import com.greglturnquist.hackingspringboot.reactive.repository.commerce.ItemRepository;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -12,6 +16,7 @@ public class CartService {
 
     private final ItemRepository itemRepository;
     private final CartRepository cartRepository;
+
 
     public CartService(ItemRepository itemRepository, CartRepository cartRepository) {
         this.itemRepository = itemRepository;
@@ -37,4 +42,5 @@ public class CartService {
                                 .map(cartItem -> cart)))
                 .flatMap(this.cartRepository::save);
     }
+
 }
