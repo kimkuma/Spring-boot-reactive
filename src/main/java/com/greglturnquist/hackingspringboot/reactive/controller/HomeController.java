@@ -37,7 +37,8 @@ public class HomeController {
     @GetMapping(value = "/home")
     Mono<Rendering> renderingHome() {
         return Mono.just(Rendering.view("cart_home.html")
-                .modelAttribute("items",this.itemRepository.findAll())
+                .modelAttribute("items",this.itemRepository.findAll()
+                .doOnNext(System.out::println))
                 .modelAttribute("cart",this.cartRepository.findById("My Cart")
                         .defaultIfEmpty(new Cart("My cart")))
                 .build()
@@ -46,7 +47,7 @@ public class HomeController {
 
     @PostMapping("/add/{id}")
     Mono<String> addToCart(@PathVariable String id) {
-        return cartService.addToCart("My Cart", id)
+        return inventoryService.addItemToCart("My Cart",id)
                 .thenReturn("redirect:/home");
     }
 
